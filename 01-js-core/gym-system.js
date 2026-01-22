@@ -49,11 +49,10 @@ const robTheGym = (maxCapacity) => {
     } else if(robbedMass + newWeight > maxCapacity){
       continue;
     }
-    let count = 0;
-    while(robbedMass + newWeight <= maxCapacity && count !== sortedInventory[i].count){
-      robbedMass += newWeight;
-      count += 1;
-    }
+    const maxWeCanTake = Math.floor((maxCapacity - robbedMass) / newWeight);
+    const countToTake = Math.min(sortedInventory[i].count, maxWeCanTake);
+    
+    robbedMass += newWeight * countToTake;
   }
   return robbedMass;
 }
